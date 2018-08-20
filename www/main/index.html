@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="3q30uQ1_gO_dEVjUO6EsTgpovt8MHTyY75774HmTSb0" />
+    <title>පිටක.lk Sinhala Tripitaka</title>
+    <meta name="description" content="පාළි ත්‍රිපිටකය හා එහි සිංහල පරිවර්තනයන්. The Pali Tripitaka and Sinhala Translations.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="../styles/common_styles.css?v=1" />
+    <link rel="stylesheet" href="../styles/tree_style.css?v=1" />
+    <link rel="stylesheet" href="./text_styles.css?v=1" />
+    <link rel="stylesheet" href="../styles/font-awesome.css?v=1"/>
+    <link rel="stylesheet" href="../styles/search.css?v=1"/>
+    <link rel="stylesheet" href="../dialog/multi-select.css?v=1"/>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-46817481-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <style>
+        i.ss-hide {
+            font-style: normal;
+        }
+        #select-pali-sinhala {
+            display: none;
+        }
+        #select-pali-sinhala.show {
+            display: block;
+        }
+        @media screen and (max-width: 800pt) {
+            .pitaka-tree-container {
+                position: absolute;
+                display: none;
+                height: 100%;
+                max-width: 100%;
+                -webkit-box-shadow: 8px 9px 42px 8px rgba(0,0,0,0.19);
+                -moz-box-shadow: 8px 9px 42px 8px rgba(0,0,0,0.19);
+                box-shadow: 8px 9px 42px 8px rgba(0,0,0,0.19);
+            }
+            .pitaka-tree-container .user-opened {
+                display: block;
+            }
+        }
+        @media screen and (max-width: 400pt) {
+            td.user-closed-coll {
+                display: none;
+            }
+            #select-num-columns {
+                display: none;
+            }
+            #select-pali-sinhala {
+                display: block;
+            }
+            .ss-hide {
+                display: none;
+            }
+        }
+        @media screen and (min-width: 400pt) {
+            td.force-closed-coll {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div align="center" style="margin:0 auto; max-width: 1000pt; height: 100%; display: flex; flex-flow: column; overflow: hidden;">
+
+    <div style="flex: 0 1 auto;">
+        <div class="title-bar">
+            <i id="tree-toggle" class="fa fa-sitemap" tip="සූත්‍ර නාමාවලිය අරින්න වහන්න"></i>
+            <div style="flex: 1 1;">ත්‍රිපිටකය</div>
+            <i id="menu-toggle" class="fa fa-bars tipright" tip="මෙනුව වෙත පිවිසෙන්න"></i>
+        </div>
+        <div id="search-bar-div">
+            <div id='select-column-buttons' style="display: inherit;">
+                <a id="select-pali-sinhala" class="button" tip="පාලි සිංහල අතර මාරු වෙන්න"><b class="pali-cs" style="color: green;">පාලි</b><b class="sinh-aps" style="display: none; color: firebrick;">සිංහල</b></a>
+                <a id="select-num-columns" class="button" tip="තනි තීරුව හෝ තීරු දෙකක්ද යන්න"><i class="fa fa-columns fa-fw" style="display: none;"></i><i class="fa fa-window-maximize fa-fw"></i></a>
+            </div>
+            <input class="search-bar" type="text" placeholder="සොයන්න">
+            <a id="search-settings-button" class="button tipright" tip="සෙවුම පොත් කිහිපයකට සීමා කරන්න" onclick="showBookSelectDialog(1)"><i class="fa fa-wrench fa-lg action"></i></a>
+            <a id="search-results-button" class="button tipright" tip="කලින් සෙවුමේ ප්‍රතිපල පෙන්වන්න"><i class="fa fa-table fa-lg"></i><i class="ss-hide"> සෙවුම</i></a>
+            
+            <div id="menu-list" style="right: 0; top: 0;">
+                <a class="menu-list-item" href="intro.html?goto=about"><i class="fa fa-male fa-fw"></i> අප ගැන</a>
+                <a class="menu-list-item" href="intro.html?goto=usage"><i class="fa fa-question-circle fa-fw"></i> භාවිතයට උපදෙස්</a>
+                <a class="menu-list-item" href="intro.html?goto=download"><i class="fa fa-download fa-fw" style="color: blue;"></i> භාගත කරන්න</a>
+                <!--<a class="menu-list-item" href="../"><i class="fa fa-file-text-o fa-fw" style="color: darkgreen;"></i> සරල ත්‍රිපිටකය</a>-->
+                <a class="menu-list-item" href="https://pitaka.lk/dict"><i class="fa fa-leaf fa-fw" style="color: green;"></i> පාළි-සිංහල ශබ්දකෝෂය</a>
+                <a class="menu-list-item" href="https://pitaka.lk/bjt"><i class="fa fa-book fa-fw" style="color: darkgreen;"></i> බුද්ධ ජයන්ති ත්‍රිපිටකය</a>
+                <a class="menu-list-item" href="https://www.facebook.com/pitaka.lk"><i style="color: blue;" class="fa fa-facebook fa-fw"></i> Facebook පිටුව</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="contents-area" style="flex: 1 1 auto; display: flex; flex-flow: row nowrap; position: relative; overflow: auto;" >
+        <div class="pitaka-tree-container" style="flex: 0 1 auto;">
+            <div class="pitaka-tree"></div>
+        </div>
+
+        <div id="search-area" style="flex: 1 1 auto; overflow-y: auto;">
+            <div id="search-status" align="center">සෙවීම සඳහා උඩ කොටුවේ නම type කරන්න.</div>
+            <div id="search-filter-status" align="center"></div>
+            <table id="search-results">
+                <thead>
+                    <tr>
+                        <td><i class="fa fa-search fa-fw"></i> ගැළපෙන වචන<span class="sort-action" by="nikaya">
+                            <a class="button" tip="නිකාය වැඩිවන පිළිවෙලට පෙළගස්වන්න" order="asc"><i class="fa fa-sort-alpha-asc fa-fw"></i></a>
+                            <a class="button" tip="නිකාය අඩුවන පිළිවෙලට පෙළගස්වන්න" order="desc"><i class="fa fa-sort-alpha-desc fa-fw"></i></a></span>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div id="text-view-area" class="text-section" style="flex: 1 1 ; overflow-y: auto; padding: 2pt; position: relative;">
+            <table id="text-view-table">
+                <tbody id="text-view-tbody"></tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- dialog box -->
+<div id="dialog-overlay" onclick="closeDialog()"></div>
+<div id="dialog-box">
+    <div class="dialog-content">
+        <div id="dialog-message"></div>
+    </div>
+</div>
+
+<script src="../scripts/jquery-1.11.1.min.js"></script>
+<script src="../scripts/underscore-min.js"></script>
+<script src="../scripts/vkbeautify.js"></script>
+<script src="../scripts/utilities.js?v=1"></script>
+<script src="../scripts/singlish.js?v=1"></script>
+<script src="../scripts/pitakaTree.js?v=1"></script>
+<script src="./search.js?v=1"></script>
+<script src="./pitakaTable.js?v=1"></script>
+<script src="../dialog/jquery.multi-select.js?v=1"></script>
+<script src="../dialog/dialog_select_book.js?v=1"></script>
+<script>
+    var userCloseColl = ''; // will be set when text is loaded
+    var numOpenedColls = 2;
+    function showSearchArea() {
+        $('#search-area').show();
+        $('#text-view-area, #select-column-buttons').hide();
+    }
+    function showTextArea() {
+        $('#search-area').hide();
+        $('#text-view-area, #select-column-buttons').show();
+    }
+
+    $( document ).ready( function() {
+        console.log('OS detected: ' + getOS());
+        $('.pitaka-tree').load('text/main_toc_full.xml', function () {
+            $(this).pitakaTree();
+            // set startup location if specified in url params
+            var location = getStartupLocation();
+            if (location) {
+                pitakaLkOpenLocation(location, 'startup');
+            } else {
+                showSearchArea();
+            }
+        });
+
+        $('#menu-toggle').mousedown(function (e) {
+            $('#menu-list').animate({height: 'toggle'}, 200);
+            e.stopPropagation();
+        });
+        $('#tree-toggle').mousedown(function(e) {
+            $('.pitaka-tree-container').animate({width: 'toggle'}, 250);
+            $('.pitaka-tree-container').toggleClass('user-opened');
+            e.stopPropagation();
+        });
+        $('#menu-list, .pitaka-tree-container').mousedown(function(e) {
+            e.stopPropagation();
+        });
+        $('body').mousedown(function() {
+            $('#menu-list').animate({height: 'hide'}, 350);
+            if ($('.pitaka-tree-container').css('position') == 'absolute') { // hide the tree if it is overlapping
+                $('.pitaka-tree-container').animate({width: 'hide'}, 250);
+            }
+        });
+
+        $('#select-num-columns').click(function(e) {
+            if (!userCloseColl) return;
+            numOpenedColls = (numOpenedColls == 2) ? 1 : 2;
+            $(this).children().toggle();
+            if (numOpenedColls == 2) {
+                $('#select-pali-sinhala').removeClass('show');
+                $('#text-view-tbody td').removeClass('force-closed-coll');
+            } else { // one column
+                $('#select-pali-sinhala').addClass('show');
+                $('#text-view-tbody td.user-closed-coll').addClass('force-closed-coll');
+            }
+        });
+        $('#select-pali-sinhala').click(function(e) {
+            if (!userCloseColl) return;
+            userCloseColl = (userCloseColl == 'pali-cs') ? 'sinh-aps' : 'pali-cs';
+            $('#text-view-tbody td').toggleClass('user-closed-coll');
+            if (numOpenedColls == 1) {
+                $('#text-view-tbody td.user-closed-coll').addClass('force-closed-coll');
+                $('#text-view-tbody td:not(.user-closed-coll)').removeClass('force-closed-coll');
+            }
+            $(this).children().toggle();
+        });
+
+        $.fn.registerTextClicks();
+
+        function handleResize() {
+            // to make sure the overlay fills the screen and dialogbox aligned to center
+            // only do it if the dialog box is not hidden
+            if (!$('#dialog-box').is(':hidden')) repositionDialog();
+        }
+        $(window).resize(handleResize);
+
+        $('#search-results-button').click(function (e) {
+            $('#search-area, #text-view-area, #select-column-buttons').toggle();
+        });
+        $('.search-bar').focus(function (){
+            showSearchArea();
+        });
+        $('span.sort-action').on('click', 'a', function () {
+            var by = $(this).parent().attr('by');
+            var order = $(this).attr('order');
+            refreshCurrentSearchDisplay(by, order);
+        });
+
+        $('[tip]').hover(showToolTip, hideToolTip);
+
+        // do this at the end due to index pre-fetching
+        initSearchBar();
+    });
+</script>
+</body>
+</html>
